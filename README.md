@@ -10,6 +10,24 @@
 
 ## Компиляция и запуск
 
+### Через IntelliJ IDEA (рекомендуется)
+
+1. Откройте проект в IntelliJ IDEA
+2. IDE автоматически распознает Gradle проект и настроит его
+3. Нажмите зеленую кнопку ▶️ запуска рядом с методом `main` в `Calculator.java`
+
+### Через Gradle (командная строка)
+
+```bash
+# Запуск приложения
+./gradlew run
+
+# Или на Windows
+gradlew.bat run
+```
+
+### Через javac (альтернативный способ)
+
 ```bash
 # Компиляция
 javac -d out src/main/java/com/burime/calculator/Calculator.java
