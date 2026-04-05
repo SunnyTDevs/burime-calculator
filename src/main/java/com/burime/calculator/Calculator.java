@@ -8,5 +8,6 @@ public class Calculator {
         System.out.println("Введите первое число:");
         int a = scanner.nextInt();
         System.out.println("Введите операцию (+, -):");
+        String op = scanner.next();
     }
 }
