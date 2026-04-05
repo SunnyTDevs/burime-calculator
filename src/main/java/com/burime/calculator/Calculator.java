@@ -10,5 +10,6 @@ public class Calculator {
         System.out.println("Введите операцию (+, -):");
         String op = scanner.next();
         System.out.println("Введите второе число:");
+        int b = scanner.nextInt();
     }
 }
