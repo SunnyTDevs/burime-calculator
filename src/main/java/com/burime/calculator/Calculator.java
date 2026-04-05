@@ -12,5 +12,6 @@ public class Calculator {
         System.out.println("Введите второе число:");
         int b = scanner.nextInt();
         int result = op.equals("+") ? a + b : a - b;
+        System.out.println("Результат: " + result);
     }
 }
