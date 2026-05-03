@@ -20,8 +20,8 @@ public class Node implements ListComponent {
 
     @Override
     public void display() {
-        System.out.println("[Node: " + data + "]");
-        next.display();
+        System.out.print("[Node: " + data + "] -> ");
+        next.display(); // Рекурсивный вызов
     }
 
     @Override

@@ -7,7 +7,7 @@ public class Terminator implements ListComponent {
 
     @Override
     public void display() {
-        System.out.println("[END]");
+        System.out.print("[END]");
     }
 
     @Override
