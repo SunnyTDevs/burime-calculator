@@ -30,10 +30,17 @@ class TerminatorTest {
     }
 
     @Test
-    @DisplayName("toStringRepresentation должен возвращать пустую строку")
-    void testToStringRepresentation() {
-        String result = terminator.toStringRepresentation();
+    @DisplayName("toString должен возвращать пустую строку")
+    void testToString() {
+        String result = terminator.toString();
         assertEquals("", result, "Terminator должен возвращать пустую строку");
+    }
+
+    @Test
+    @DisplayName("add не должен выбрасывать исключение")
+    void testAdd() {
+        assertDoesNotThrow(() -> terminator.add("Test"),
+                "Terminator.add не должен выбрасывать исключение");
     }
 
     @Test

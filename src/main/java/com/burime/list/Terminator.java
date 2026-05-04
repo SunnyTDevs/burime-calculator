@@ -1,10 +1,9 @@
 package com.burime.list;
 
-/**
- * Конечная точка списка (Leaf в паттерне Composite).
- * Завершает цепочку связанного списка.
- */
 public class Terminator implements ListComponent {
+
+    public Terminator() {
+    }
 
     @Override
     public void display() {
@@ -12,7 +11,16 @@ public class Terminator implements ListComponent {
     }
 
     @Override
-    public String toStringRepresentation() {
+    public void add(String data) {
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return true;
+    }
+
+    @Override
+    public String toString() {
         return "";
     }
 }

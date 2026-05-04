@@ -19,7 +19,7 @@ class ListComponentIntegrationTest {
     @DisplayName("Пустой список (только Terminator)")
     void testEmptyList() {
         ListComponent list = new Terminator();
-        assertEquals("", list.toStringRepresentation(),
+        assertEquals("", list.toString(),
                 "Пустой список должен возвращать пустую строку");
     }
 
@@ -27,56 +27,49 @@ class ListComponentIntegrationTest {
     @DisplayName("Список из одного элемента")
     void testSingleElementList() {
         ListComponent list = new Node("Solo");
-        assertEquals("Solo", list.toStringRepresentation());
+        assertEquals("Solo", list.toString());
     }
 
     @Test
-    @DisplayName("Список из пяти элементов")
+    @DisplayName("Список из пяти элементов через add()")
     void testFiveElementList() {
-        Node node5 = new Node("E");
-        Node node4 = new Node("D", node5);
-        Node node3 = new Node("C", node4);
-        Node node2 = new Node("B", node3);
-        Node node1 = new Node("A", node2);
+        Node node1 = new Node("A");
+        node1.add("B");
+        node1.add("C");
+        node1.add("D");
+        node1.add("E");
 
-        assertEquals("A -> B -> C -> D -> E", node1.toStringRepresentation());
+        assertEquals("A -> B -> C -> D -> E", node1.toString());
     }
 
     @Test
-    @DisplayName("Динамическое добавление элементов в конец списка")
+    @DisplayName("Динамическое добавление элементов в конец списка через add()")
     void testDynamicListBuilding() {
         Node head = new Node("Start");
-        Node middle = new Node("Middle");
-        Node end = new Node("End");
+        head.add("Middle");
+        head.add("End");
 
-        head.setNext(middle);
-        middle.setNext(end);
-
-        assertEquals("Start -> Middle -> End", head.toStringRepresentation());
+        assertEquals("Start -> Middle -> End", head.toString());
     }
 
     @Test
-    @DisplayName("Вставка узла в середину списка")
-    void testInsertInMiddle() {
-        Node node3 = new Node("Third");
-        Node node1 = new Node("First", node3);
+    @DisplayName("Добавление нескольких элементов через add()")
+    void testMultipleAdds() {
+        Node node1 = new Node("First");
+        node1.add("Second");
+        node1.add("Third");
 
-        Node node2 = new Node("Second", node3);
-        node1.setNext(node2);
-
-        assertEquals("First -> Second -> Third", node1.toStringRepresentation());
+        assertEquals("First -> Second -> Third", node1.toString());
     }
 
     @Test
-    @DisplayName("Замена части списка")
-    void testReplacePartOfList() {
-        Node oldNode = new Node("Old");
-        Node head = new Node("Head", oldNode);
+    @DisplayName("Построение цепочки через add()")
+    void testChainBuilding() {
+        Node head = new Node("Head");
+        head.add("New1");
+        head.add("New2");
 
-        Node newChain = new Node("New1", new Node("New2"));
-        head.setNext(newChain);
-
-        assertEquals("Head -> New1 -> New2", head.toStringRepresentation());
+        assertEquals("Head -> New1 -> New2", head.toString());
     }
 
     @Test
@@ -85,24 +78,21 @@ class ListComponentIntegrationTest {
         ListComponent component1 = new Node("Node");
         ListComponent component2 = new Terminator();
 
-        assertNotNull(component1.toStringRepresentation());
-        assertNotNull(component2.toStringRepresentation());
+        assertNotNull(component1.toString());
+        assertNotNull(component2.toString());
     }
 
     @Test
-    @DisplayName("Длинный список (производительность)")
+    @DisplayName("Длинный список (производительность) через add()")
     void testLongList() {
         Node head = new Node("0");
-        Node current = head;
 
         for (int i = 1; i < 10; i++) {
-            Node next = new Node(String.valueOf(i));
-            current.setNext(next);
-            current = next;
+            head.add(String.valueOf(i));
         }
 
         String expected = "0 -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9";
-        assertEquals(expected, head.toStringRepresentation());
+        assertEquals(expected, head.toString());
     }
 
     @Test
@@ -113,9 +103,9 @@ class ListComponentIntegrationTest {
         System.setOut(new PrintStream(outputStream));
 
         try {
-            Node node3 = new Node("C");
-            Node node2 = new Node("B", node3);
-            Node node1 = new Node("A", node2);
+            Node node1 = new Node("A");
+            node1.add("B");
+            node1.add("C");
 
             node1.display();
 

@@ -1,9 +1,5 @@
 package com.burime.list;
 
-/**
- * Узел списка (Composite в паттерне Composite).
- * Хранит данные и ссылку на следующий элемент списка.
- */
 public class Node implements ListComponent {
 
     private final String data;
@@ -14,21 +10,12 @@ public class Node implements ListComponent {
         this.next = new Terminator();
     }
 
-    public Node(String data, ListComponent next) {
-        this.data = data;
-        this.next = next;
-    }
-
     public String getData() {
         return data;
     }
 
     public ListComponent getNext() {
         return next;
-    }
-
-    public void setNext(ListComponent next) {
-        this.next = next;
     }
 
     @Override
@@ -38,7 +25,22 @@ public class Node implements ListComponent {
     }
 
     @Override
-    public String toStringRepresentation() {
-        return data + (next instanceof Terminator ? "" : " -> " + next.toStringRepresentation());
+    public void add(String data) {
+        if (next.isEmpty()) {
+            next = new Node(data);
+        } else {
+            next.add(data);
+        }
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public String toString() {
+        String nextStr = next.toString();
+        return nextStr.isEmpty() ? data : data + " -> " + nextStr;
     }
 }

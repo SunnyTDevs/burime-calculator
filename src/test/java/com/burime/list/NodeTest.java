@@ -27,31 +27,36 @@ class NodeTest {
     }
 
     @Test
-    @DisplayName("Создание узла с данными должно инициализировать Terminator")
+    @DisplayName("Создание узла с данными должно инициализировать пустой конец списка")
     void testNodeCreationWithData() {
         Node node = new Node("Test");
         assertEquals("Test", node.getData(), "Данные узла должны быть 'Test'");
         assertNotNull(node.getNext(), "Следующий элемент не должен быть null");
-        assertTrue(node.getNext() instanceof Terminator,
-                "По умолчанию следующий элемент должен быть Terminator");
+        assertEquals("Test", node.toString(),
+                "Одиночный узел должен возвращать только свои данные без стрелок");
     }
 
     @Test
-    @DisplayName("Создание узла с указанием следующего элемента")
-    void testNodeCreationWithNext() {
-        ListComponent next = new Terminator();
-        Node node = new Node("Test", next);
-        assertEquals("Test", node.getData());
-        assertSame(next, node.getNext(), "Следующий элемент должен быть переданным объектом");
-    }
-
-    @Test
-    @DisplayName("setNext должен устанавливать следующий элемент")
-    void testSetNext() {
+    @DisplayName("Метод add() добавляет элемент в конец списка")
+    void testAddMethod() {
         Node node = new Node("First");
-        Node secondNode = new Node("Second");
-        node.setNext(secondNode);
-        assertSame(secondNode, node.getNext(), "setNext должен установить новый следующий элемент");
+        node.add("Second");
+        node.add("Third");
+
+        assertEquals("First -> Second -> Third", node.toString(),
+                "Метод add должен добавлять элементы в конец списка");
+    }
+
+    @Test
+    @DisplayName("Метод add() создает правильную цепочку")
+    void testAddCreatesChain() {
+        Node head = new Node("A");
+        head.add("B");
+        head.add("C");
+        head.add("D");
+
+        assertEquals("A -> B -> C -> D", head.toString(),
+                "Метод add должен создавать правильную цепочку элементов");
     }
 
     @Test
@@ -67,9 +72,9 @@ class NodeTest {
     @Test
     @DisplayName("display цепочки узлов должен вывести все узлы")
     void testDisplayMultipleNodes() {
-        Node node3 = new Node("Node3");
-        Node node2 = new Node("Node2", node3);
-        Node node1 = new Node("Node1", node2);
+        Node node1 = new Node("Node1");
+        node1.add("Node2");
+        node1.add("Node3");
 
         node1.display();
         String output = outputStream.toString();
@@ -81,21 +86,24 @@ class NodeTest {
     }
 
     @Test
-    @DisplayName("toStringRepresentation одиночного узла")
-    void testToStringRepresentationSingleNode() {
+    @DisplayName("toString одиночного узла")
+    void testToStringSingleNode() {
         Node node = new Node("Single");
-        assertEquals("Single", node.toStringRepresentation(),
+        assertEquals("Single", node.toString(),
                 "Одиночный узел должен возвращать только свои данные");
     }
 
     @Test
-    @DisplayName("toStringRepresentation цепочки узлов")
-    void testToStringRepresentationMultipleNodes() {
+    @DisplayName("toString цепочки узлов")
+    void testToStringMultipleNodes() {
         Node node3 = new Node("C");
-        Node node2 = new Node("B", node3);
-        Node node1 = new Node("A", node2);
+        Node node2 = new Node("B");
+        Node node1 = new Node("A");
 
-        assertEquals("A -> B -> C", node1.toStringRepresentation(),
+        node1.add("B");
+        node1.add("C");
+
+        assertEquals("A -> B -> C", node1.toString(),
                 "Цепочка должна вернуть 'A -> B -> C'");
     }
 
@@ -116,17 +124,16 @@ class NodeTest {
     }
 
     @Test
-    @DisplayName("Построение списка с помощью setNext")
-    void testBuildListWithSetNext() {
-        Node node1 = new Node("First");
-        Node node2 = new Node("Second");
-        Node node3 = new Node("Third");
+    @DisplayName("Метод add() работает с пустым списком")
+    void testAddToSingleNode() {
+        Node node = new Node("Only");
 
-        node1.setNext(node2);
-        node2.setNext(node3);
+        assertEquals("Only", node.toString(),
+                "Одиночный узел должен корректно отображаться");
 
-        assertEquals("First -> Second -> Third", node1.toStringRepresentation(),
-                "Список должен быть построен корректно через setNext");
+        node.add("Added");
+        assertEquals("Only -> Added", node.toString(),
+                "После добавления должна получиться цепочка");
     }
 
     @org.junit.jupiter.api.AfterEach
