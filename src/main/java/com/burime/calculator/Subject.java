@@ -28,32 +28,12 @@ public class Subject {
         observers.putIfAbsent(observer, true); // по умолчанию активен
     }
 
-    /**
-     * Открепить наблюдателя от субъекта
-     */
-    public void detach(MyObserver observer) {
-        observers.remove(observer);
-    }
 
     /**
      * Установить активность наблюдателя (для CheckBox)
      */
     public void setObserverActive(MyObserver observer, boolean active) {
         observers.put(observer, active);
-    }
-
-    /**
-     * Проверить, активен ли наблюдатель
-     */
-    public boolean isObserverActive(MyObserver observer) {
-        return observers.getOrDefault(observer, false);
-    }
-
-    /**
-     * Получить список всех наблюдателей
-     */
-    public List<MyObserver> getObservers() {
-        return new ArrayList<>(observers.keySet());
     }
 
     /**
@@ -83,20 +63,6 @@ public class Subject {
         state = new SubjectState(newState);
         notifyObservers();
         return true;
-    }
-
-    /**
-     * Проверить, возможен ли переход
-     */
-    public boolean canTransition(String event) {
-        return state.getState().getTransitions().containsKey(event);
-    }
-
-    /**
-     * Получить список возможных переходов из текущего состояния
-     */
-    public List<String> getPossibleTransitions() {
-        return List.copyOf(state.getState().getTransitions().keySet());
     }
 
     /**

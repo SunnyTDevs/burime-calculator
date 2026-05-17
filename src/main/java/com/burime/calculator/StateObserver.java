@@ -4,14 +4,16 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 /**
- * ConcreteObserver2 - наблюдатель для отображения текущего состояния субъекта
+  наблюдатель для отображения текущего состояния субъекта
  */
 @RequiredArgsConstructor
-@Getter
 public class StateObserver implements MyObserver {
 
+    @Getter(onMethod_ = {@Override})
     private final String name;
+    @Getter
     private String state = "—";
+    @Getter
     private int updateCount = 0;
 
     @Override
@@ -25,10 +27,4 @@ public class StateObserver implements MyObserver {
         return "Состояние: " + state + " (обновлений: " + updateCount + ")";
     }
 
-    /**
-     * Сбросить счётчик обновлений
-     */
-    public void resetCount() {
-        updateCount = 0;
-    }
 }

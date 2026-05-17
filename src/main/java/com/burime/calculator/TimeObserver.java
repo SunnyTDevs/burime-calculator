@@ -8,14 +8,16 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 /**
- * ConcreteObserver1 - наблюдатель для отображения времени активации субъекта
+  наблюдатель для отображения времени активации субъекта
  */
 @RequiredArgsConstructor
-@Getter
 public class TimeObserver implements MyObserver {
     private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("HH:mm:ss.SSS");
+
+    @Getter(onMethod_ = {@Override})
     private final String name;
     private String lastReceivedState = "—";
+    @Getter
     private String activationTimeString = "—";
 
     @Override
