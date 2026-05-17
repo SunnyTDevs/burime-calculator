@@ -16,6 +16,7 @@ public class TimeObserver implements MyObserver {
 
     @Getter(onMethod_ = {@Override})
     private final String name;
+    @Getter
     private String lastReceivedState = "—";
     @Getter
     private String activationTimeString = "—";

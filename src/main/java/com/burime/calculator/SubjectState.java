@@ -63,6 +63,10 @@ public class SubjectState {
         public String getDescription() {
             return description;
         }
+
+        public Map<String, State> getTransitions() {
+            return transitions;
+        }
     }
 
     public String getDescription() {
