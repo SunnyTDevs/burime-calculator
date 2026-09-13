@@ -12,7 +12,7 @@ java {
 }
 
 application {
-    mainClass = 'com.burime.calculator.Calculator'
+    mainClass = 'com.burime.calculator.Main'
 }
 
 repositories {
