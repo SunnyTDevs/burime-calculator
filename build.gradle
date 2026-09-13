@@ -12,7 +12,8 @@ java {
 }
 
 application {
-    mainClass = 'com.burime.calculator.Calculator'
+    mainClass = 'com.burime.calculator.Main'
+    applicationDefaultJvmArgs = ['-ea']
 }
 
 repositories {
@@ -20,6 +21,12 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.slf4j:slf4j-api:2.0.17'
+    runtimeOnly 'ch.qos.logback:logback-classic:1.5.18'
+
+    compileOnly 'org.projectlombok:lombok:1.18.38'
+    annotationProcessor 'org.projectlombok:lombok:1.18.38'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
     testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
